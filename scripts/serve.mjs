@@ -4,7 +4,7 @@ import { extname, resolve, sep } from 'node:path';
 
 const root = resolve(process.argv[2] || '_site');
 const mount = '/recipes/';
-const port = Number(process.env.PORT || 4173);
+const port = Number(process.env.PORT || 47131);
 const types = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
