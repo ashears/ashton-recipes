@@ -1,0 +1,11 @@
+{
+  "name": "ashton-recipes",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "npm run build && node scripts/serve.mjs",
+    "test": "node --test"
+  }
+}
