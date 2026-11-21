@@ -36,7 +36,7 @@ test('an empty collection builds a publishable index with no detail pages', asyn
 test('adding recipes generates sorted links, search data and complete detail pages', async (t) => {
   const paths = await fixture(t);
   await writeFile(join(paths.recipesDir, 'lemon-beans.json'), JSON.stringify(beans));
-  await writeFile(join(paths.recipesDir, 'toast.json'), JSON.stringify({ ...beans, title: 'Avocado <Toast>' }));
+  await writeFile(join(paths.recipesDir, 'toast.json'), JSON.stringify({ ...beans, title: 'Avocado <Toast>', yield: undefined, totalMinutes: undefined }));
   equal(await build(paths), 2);
 
   const index = await readFile(join(paths.outDir, 'index.html'), 'utf8');
@@ -48,6 +48,9 @@ test('adding recipes generates sorted links, search data and complete detail pag
   match(page, /Serves 2[\s\S]+10 min total[\s\S]+href="#steps"[\s\S]+id="ingredients"[\s\S]+<ul class="ingredients">\s+<li>1 can white beans<\/li>\s+<li>1 tablespoon lemon juice<\/li>\s+<\/ul>[\s\S]+id="steps"[\s\S]+<ol class="steps">[\s\S]+Stir in 1 tablespoon lemon juice\.[\s\S]+Cooking notes[\s\S]+href="https:\/\/example\.com\/beans\?a=1&amp;b=2">Original recipe/);
 
   doesNotMatch(page, /type="checkbox"|checklist\.js|reset-ingredients/);
+
+  const toastPage = await readFile(join(paths.outDir, 'recipe', 'toast', 'index.html'), 'utf8');
+  doesNotMatch(toastPage, /recipe-meta|undefined/);
 
   await rm(join(paths.recipesDir, 'toast.json'));
   equal(await build(paths), 1);

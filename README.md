@@ -6,7 +6,7 @@ A personal cookbook by Ashton Shears. The ingredient list comes first, with a ju
 
 Open this repository in Codex and paste a prompt like this:
 
-> Draft a recipe from [URL, notes, or idea]. Adapt it to [my preferred units, flavors, or substitutions]. Follow AGENTS.md, keep the directions short and scannable, and repeat amounts where I need them in a step. Link the original source if I provided one. Run the tests and build, then show me the draft and flag any details I need to confirm.
+> Draft a recipe from [URL, notes, or idea]. Adapt it to [my preferred units, flavors, or substitutions]. Follow AGENTS.md, keep the directions short and scannable, and repeat provided amounts where I need them in a step. Link the original source if I provided one. Run the tests and build, then show me the draft and flag any details I need to confirm.
 
 Review the JSON before merging. Recipes in the repository and on the website are public.
 
@@ -34,7 +34,7 @@ Add a file such as `recipes/lemon-herb-beans.json`. The filename sets the URL, s
 }
 ```
 
-Require `title`, `yield`, `ingredients`, and `steps`. Ingredients and steps are nonempty arrays of plain-text lines. Optional fields are `totalMinutes` (a positive whole number), `tags` and `notes` (nonempty arrays of plain-text lines when present), and `sourceUrl` (an absolute HTTP or HTTPS URL). The build prints the filename and reason if a recipe fails validation.
+Require `title`, `ingredients`, and `steps`. Ingredients and steps are nonempty arrays of plain-text lines. Optional fields are `yield` (a plain-text serving count or batch size), `totalMinutes` (a positive whole number), `tags` and `notes` (nonempty arrays of plain-text lines when present), and `sourceUrl` (an absolute HTTP or HTTPS URL). The build prints the filename and reason if a recipe fails validation.
 
 ## Preview and publish
 

@@ -1,17 +1,16 @@
 {
   "title": "Taco-Flavor Ground Beef",
-  "yield": "Serves 4",
   "ingredients": [
-    "1 pound grass-fed ground beef",
-    "½ teaspoon salt, plus more to taste",
-    "¼ teaspoon ground black pepper",
-    "1 teaspoon ground cumin, plus more to taste",
-    "¼ teaspoon crushed red pepper flakes",
-    "2 cloves garlic, minced"
+    "Grass-fed ground beef",
+    "Salt",
+    "Pepper",
+    "Cumin",
+    "Red pepper flakes",
+    "Garlic"
   ],
   "steps": [
-    "Heat a skillet over medium-high heat. Add 1 pound of ground beef and break it up with a spatula.",
-    "Stir in ½ teaspoon salt, ¼ teaspoon black pepper, 1 teaspoon cumin, ¼ teaspoon red pepper flakes, and 2 minced garlic cloves. Cook, stirring and breaking up the beef, until it reaches 160°F on a food thermometer.",
+    "Heat a skillet over medium-high heat. Add the ground beef and break it up with a spatula.",
+    "Stir in the salt, pepper, cumin, red pepper flakes, and garlic. Cook, stirring and breaking up the beef, until it reaches 160°F on a food thermometer.",
     "Taste the cooked beef. Add more seasoning as needed, starting with cumin and salt."
   ],
   "tags": ["beef", "tacos"]

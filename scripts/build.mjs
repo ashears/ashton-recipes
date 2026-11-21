@@ -50,7 +50,7 @@ function validate(recipe) {
 
   return {
     title: requireText(recipe.title, 'title'),
-    yield: requireText(recipe.yield, 'yield'),
+    yield: recipe.yield === undefined ? undefined : requireText(recipe.yield, 'yield'),
     ingredients: requireList(recipe.ingredients, 'ingredients'),
     steps: requireList(recipe.steps, 'steps'),
     totalMinutes,
@@ -142,14 +142,14 @@ function recipePage(recipe) {
   const ingredients = recipe.ingredients.map((line) => `          <li>${escapeHtml(line)}</li>`).join('\n');
   const steps = recipe.steps.map((step) => `          <li>${escapeHtml(step)}</li>`).join('\n');
   const notes = recipe.notes.map((note) => `        <p>${escapeHtml(note)}</p>`).join('\n');
+  const yieldText = recipe.yield ? `<span>${escapeHtml(recipe.yield)}</span>` : '';
   const totalTime = recipe.totalMinutes ? `<span>${recipe.totalMinutes} min total</span>` : '';
 
   return page({
     title: `${recipe.title} | Recipes`,
     relativeRoot: '../../',
     content: `      <h1>${escapeHtml(recipe.title)}</h1>
-      <p class="recipe-meta"><span>${escapeHtml(recipe.yield)}</span>${totalTime}</p>
-      <a class="jump" href="#steps">Jump to steps</a>
+${yieldText || totalTime ? `      <p class="recipe-meta">${yieldText}${totalTime}</p>\n` : ''}      <a class="jump" href="#steps">Jump to steps</a>
       <section aria-labelledby="ingredients">
         <h2 id="ingredients">Ingredients</h2>
         <ul class="ingredients">
