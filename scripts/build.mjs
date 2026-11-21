@@ -139,9 +139,7 @@ ${items}
 }
 
 function recipePage(recipe) {
-  const ingredients = recipe.ingredients.map((line, index) => `          <li>
-            <label><input type="checkbox" name="ingredient-${index + 1}"><span>${escapeHtml(line)}</span></label>
-          </li>`).join('\n');
+  const ingredients = recipe.ingredients.map((line) => `          <li>${escapeHtml(line)}</li>`).join('\n');
   const steps = recipe.steps.map((step) => `          <li>${escapeHtml(step)}</li>`).join('\n');
   const notes = recipe.notes.map((note) => `        <p>${escapeHtml(note)}</p>`).join('\n');
   const totalTime = recipe.totalMinutes ? `<span>${recipe.totalMinutes} min total</span>` : '';
@@ -149,16 +147,12 @@ function recipePage(recipe) {
   return page({
     title: `${recipe.title} | Recipes`,
     relativeRoot: '../../',
-    script: 'checklist.js',
     content: `      <h1>${escapeHtml(recipe.title)}</h1>
       <p class="recipe-meta"><span>${escapeHtml(recipe.yield)}</span>${totalTime}</p>
       <a class="jump" href="#steps">Jump to steps</a>
       <section aria-labelledby="ingredients">
-        <div class="section-heading">
-          <h2 id="ingredients">Ingredients</h2>
-          <button type="button" id="reset-ingredients" hidden>Reset checklist</button>
-        </div>
-        <ul class="ingredients" role="list">
+        <h2 id="ingredients">Ingredients</h2>
+        <ul class="ingredients">
 ${ingredients}
         </ul>
       </section>

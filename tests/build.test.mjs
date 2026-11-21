@@ -1,4 +1,4 @@
-import { deepEqual, equal, match, rejects } from 'node:assert/strict';
+import { deepEqual, equal, match, doesNotMatch, rejects } from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -45,7 +45,9 @@ test('adding recipes generates sorted links, search data and complete detail pag
 
   const page = await readFile(join(paths.outDir, 'recipe', 'lemon-beans', 'index.html'), 'utf8');
   match(page, /href="\.\.\/\.\.\/assets\/site\.css"/);
-  match(page, /Serves 2[\s\S]+10 min total[\s\S]+href="#steps"[\s\S]+id="ingredients"[\s\S]+type="checkbox"[\s\S]+id="steps"[\s\S]+<ol class="steps">[\s\S]+Stir in 1 tablespoon lemon juice\.[\s\S]+Cooking notes[\s\S]+href="https:\/\/example\.com\/beans\?a=1&amp;b=2">Original recipe/);
+  match(page, /Serves 2[\s\S]+10 min total[\s\S]+href="#steps"[\s\S]+id="ingredients"[\s\S]+<ul class="ingredients">\s+<li>1 can white beans<\/li>\s+<li>1 tablespoon lemon juice<\/li>\s+<\/ul>[\s\S]+id="steps"[\s\S]+<ol class="steps">[\s\S]+Stir in 1 tablespoon lemon juice\.[\s\S]+Cooking notes[\s\S]+href="https:\/\/example\.com\/beans\?a=1&amp;b=2">Original recipe/);
+
+  doesNotMatch(page, /type="checkbox"|checklist\.js|reset-ingredients/);
 
   await rm(join(paths.recipesDir, 'toast.json'));
   equal(await build(paths), 1);

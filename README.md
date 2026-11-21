@@ -1,6 +1,6 @@
 # Recipes
 
-A personal cookbook by Ashton Shears. The ingredient checklist comes first, with a jump link to the directions. Browse the cookbook at https://ashton.website/ashton-recipes/.
+A personal cookbook by Ashton Shears. The ingredient list comes first, with a jump link to the directions. Browse the cookbook at https://ashton.website/ashton-recipes/.
 
 ## Draft a recipe with Codex
 
@@ -46,6 +46,6 @@ npm run build
 npm start
 ```
 
-The preview opens at `http://127.0.0.1:47131/ashton-recipes/`. Set `PORT` to use a different port. The build generates the index, search data, and one static page per recipe in `_site/`. For example, `lemon-herb-beans.json` becomes `recipe/lemon-herb-beans/` under the deployed project URL. Checkmarks are saved in the current browser for each recipe.
+The preview opens at `http://127.0.0.1:47131/ashton-recipes/`. Set `PORT` to use a different port. The build generates the index, search data, and one static page per recipe in `_site/`. For example, `lemon-herb-beans.json` becomes `recipe/lemon-herb-beans/` under the deployed project URL.
 
 GitHub Actions checks pull requests and builds and deploys `_site/` from `main`. In the repository's Pages settings, select **GitHub Actions** as the source. The project inherits its domain from the account's main Pages site.
