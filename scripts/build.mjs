@@ -52,7 +52,7 @@ function validate(recipe) {
     title: requireText(recipe.title, 'title'),
     yield: recipe.yield === undefined ? undefined : requireText(recipe.yield, 'yield'),
     ingredients: requireList(recipe.ingredients, 'ingredients'),
-    steps: requireList(recipe.steps, 'steps'),
+    steps: recipe.steps === undefined ? undefined : requireList(recipe.steps, 'steps'),
     totalMinutes,
     tags: recipe.tags === undefined ? [] : requireList(recipe.tags, 'tags'),
     notes: recipe.notes === undefined ? [] : requireList(recipe.notes, 'notes'),
@@ -140,7 +140,7 @@ ${items}
 
 function recipePage(recipe) {
   const ingredients = recipe.ingredients.map((line) => `          <li>${escapeHtml(line)}</li>`).join('\n');
-  const steps = recipe.steps.map((step) => `          <li>${escapeHtml(step)}</li>`).join('\n');
+  const steps = recipe.steps?.map((step) => `          <li>${escapeHtml(step)}</li>`).join('\n');
   const notes = recipe.notes.map((note) => `        <p>${escapeHtml(note)}</p>`).join('\n');
   const yieldText = recipe.yield ? `<span>${escapeHtml(recipe.yield)}</span>` : '';
   const totalTime = recipe.totalMinutes ? `<span>${recipe.totalMinutes} min total</span>` : '';
@@ -149,19 +149,19 @@ function recipePage(recipe) {
     title: `${recipe.title} | Recipes`,
     relativeRoot: '../../',
     content: `      <h1>${escapeHtml(recipe.title)}</h1>
-${yieldText || totalTime ? `      <p class="recipe-meta">${yieldText}${totalTime}</p>\n` : ''}      <a class="jump" href="#steps">Jump to steps</a>
+${yieldText || totalTime ? `      <p class="recipe-meta">${yieldText}${totalTime}</p>\n` : ''}${steps ? '      <a class="jump" href="#steps">Jump to steps</a>\n' : ''}
       <section aria-labelledby="ingredients">
         <h2 id="ingredients">Ingredients</h2>
         <ul class="ingredients">
 ${ingredients}
         </ul>
       </section>
-      <section aria-labelledby="steps">
+${steps ? `      <section aria-labelledby="steps">
         <h2 id="steps" tabindex="-1">Steps</h2>
         <ol class="steps">
 ${steps}
         </ol>
-      </section>
+      </section>` : ''}
 ${notes ? `      <section aria-labelledby="notes">
         <h2 id="notes">Cooking notes</h2>
 ${notes}

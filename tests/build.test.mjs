@@ -57,7 +57,25 @@ test('adding recipes generates sorted links, search data and complete detail pag
   deepEqual(await readdir(join(paths.outDir, 'recipe')), ['lemon-beans']);
 });
 
-test('the build rejects malformed JSON, missing steps, and unsafe source URLs', async (t) => {
+test('a recipe without steps builds as a list-only detail page', async (t) => {
+  const paths = await fixture(t);
+  const teaBlends = {
+    title: 'Tea Blends',
+    ingredients: ['Hojicha & Lavender', 'Chamomile & Mint', 'Hibiscus & Cinnamon'],
+    tags: ['tea'],
+  };
+  await writeFile(join(paths.recipesDir, 'tea-blends.json'), JSON.stringify(teaBlends));
+
+  equal(await build(paths), 1);
+  const index = await readFile(join(paths.outDir, 'index.html'), 'utf8');
+  match(index, /href="recipe\/tea-blends\/">Tea Blends<\/a>/);
+
+  const page = await readFile(join(paths.outDir, 'recipe', 'tea-blends', 'index.html'), 'utf8');
+  match(page, /<h2 id="ingredients">Ingredients<\/h2>[\s\S]+Hojicha &amp; Lavender[\s\S]+Chamomile &amp; Mint[\s\S]+Hibiscus &amp; Cinnamon/);
+  doesNotMatch(page, /href="#steps"|id="steps"|>Steps</);
+});
+
+test('the build rejects malformed JSON, empty steps, and unsafe source URLs', async (t) => {
   const paths = await fixture(t);
   const filename = join(paths.recipesDir, 'broken.json');
   await writeFile(filename, '{');

@@ -34,7 +34,7 @@ Add a file such as `recipes/lemon-herb-beans.json`. The filename sets the URL, s
 }
 ```
 
-Require `title`, `ingredients`, and `steps`. Ingredients and steps are nonempty arrays of plain-text lines. Optional fields are `yield` (a plain-text serving count or batch size), `totalMinutes` (a positive whole number), `tags` and `notes` (nonempty arrays of plain-text lines when present), and `sourceUrl` (an absolute HTTP or HTTPS URL). The build prints the filename and reason if a recipe fails validation.
+Require `title` and `ingredients`. Ingredients are a nonempty array of plain-text lines. `steps` is optional for list style content, such as tea blends; when present, it must be a nonempty array of plain-text lines. Optional fields are `yield` (a plain-text serving count or batch size), `totalMinutes` (a positive whole number), `tags` and `notes` (nonempty arrays of plain-text lines when present), and `sourceUrl` (an absolute HTTP or HTTPS URL). The build prints the filename and reason if a recipe fails validation.
 
 ## Preview and publish
 
